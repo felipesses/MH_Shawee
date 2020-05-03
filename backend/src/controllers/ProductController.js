@@ -20,17 +20,9 @@ module.exports = {
 
     async adminRead(request, response) {
 
+        const idResponsavel = request.headers.authorization;
         const products = await connection("products")
-            .join("responsavel", "responsavel.idResponsavel", "=", "products.idResponsavel")
-            .select([
-                "responsavel.*",
-                "products.nome",
-                "products.valor",
-                "products.desconto",
-                "products.avaliacao",
-                "products.quantidade"
-            ]);
-
+            .where('idResponsavel', idResponsavel)
         return response.json(products);
     },
 
@@ -49,7 +41,6 @@ module.exports = {
             quantidade,
             idResponsavel
         });
-
 
 
         return response.json({ id });
