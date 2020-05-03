@@ -2,9 +2,11 @@ exports.up = function (knex) {
     return knex.schema.createTable("products", function (table) {
         table.string("id").primary();
         table.string("nome").notNullable();
-        table.string("valor").notNullable();
-        table.string("desconto").notNullable();
-        table.string("avaliacao").notNullable();
+        table.decimal("valor").notNullable();
+        table.decimal("desconto").nullable();
+        table.decimal("avaliacao").nullable();
+        table.decimal("quantidade").notNullable();
+        table.string("idResponsavel").notNullable();
 
     });
 };
